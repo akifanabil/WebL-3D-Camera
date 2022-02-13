@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />    
+    <link rel="stylesheet" href="style.css">
+    <title>WebGL Exploration</title>
+    <script src="./main.js" defer></script>
+</head>
+<body>
+    <h1>WebGL :  Orthographic 3D</h1>
+    <div class = 'container'>
+        <canvas id="canvas"></canvas>
+    <div id="uiContainer">
+    <div id="ui">
+        <div id="cameraAngle"></div>
+    </div>
+    </div>
+    </div>
+
+
+    <!-- vertex shader -->
+    <script  id="vertex-shader-3d" type="x-shader/x-vertex">
+        attribute vec4 a_position;
+        attribute vec4 a_color;
+        
+        uniform mat4 u_matrix;
+        
+        varying vec4 v_color;
+        
+        void main() {
+        // Multiply the position by the matrix.
+        gl_Position = u_matrix * a_position;
+        
+        // Pass the color to the fragment shader.
+        v_color = a_color;
+        }
+    </script>
+    <!-- fragment shader -->
+    <script  id="fragment-shader-3d" type="x-shader/x-fragment">
+        precision mediump float;
+        
+        // Passed in from the vertex shader.
+        varying vec4 v_color;
+        
+        void main() {
+        gl_FragColor = v_color;
+    }
+    </script>    
+    <script src="./resources/webgl-utils.js"></script>
+    <script src="./resources/webgl-lessons-ui.js"></script>
+
+</body>
+</html>
+
